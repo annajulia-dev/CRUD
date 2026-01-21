@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS products(
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name varchar(50) NOT NULL,
-    price DECIMAL(10, 2) NOT NULL
-);
