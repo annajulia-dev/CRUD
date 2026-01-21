@@ -2,12 +2,14 @@ package com.base.base.controller;
 
 import com.base.base.model.Product;
 import com.base.base.repository.ProductRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/product")
+@Controller
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductRepository productRepository;
@@ -17,23 +19,20 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getAllProducts(){
-        return productRepository.findAll();
+    public String listOfProducts(Model model){
+        model.addAttribute("productsList", productRepository.findAll());
+        return "index.html";
     }
 
-    @PostMapping
-    public void addProduct(@RequestBody Product product){
+    @PostMapping("/save")
+    public String addNewProduct(@ModelAttribute Product product){
         productRepository.save(product);
+        return "redirect:/products";
     }
 
-    @PutMapping()
-    public void updateProduct(
-            @RequestBody Product product){
-        productRepository.save(product);
-    }
-    @DeleteMapping("/{id}")
-    public void deleteProduct(
-            @PathVariable long id){
+    @DeleteMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") Long id){
         productRepository.deleteById(id);
+        return "redirect:/products";
     }
 }
