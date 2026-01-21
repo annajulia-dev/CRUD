@@ -1,17 +1,27 @@
 package com.base.base.model;
 
+import jakarta.persistence.*;
+
+
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "products")
 public class Product {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+
     private BigDecimal price;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

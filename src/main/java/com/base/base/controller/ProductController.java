@@ -18,23 +18,22 @@ public class ProductController {
 
     @GetMapping
     public List<Product> getAllProducts(){
-        return productRepository.getProducts();
+        return productRepository.findAll();
     }
 
     @PostMapping
     public void addProduct(@RequestBody Product product){
-        productRepository.addProduct(product);
+        productRepository.save(product);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping()
     public void updateProduct(
-            @PathVariable int id,
             @RequestBody Product product){
-        productRepository.updateProduct(id, product);
+        productRepository.save(product);
     }
     @DeleteMapping("/{id}")
     public void deleteProduct(
-            @PathVariable int id){
-        productRepository.deleteProduct(id);
+            @PathVariable long id){
+        productRepository.deleteById(id);
     }
 }
